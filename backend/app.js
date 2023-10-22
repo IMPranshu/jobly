@@ -6,6 +6,10 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const cookieParser = require("cookie-parser"); // for authentication
 const errorHandler = require("./middleware/error");
+var cors = require("cors");
+
+// import routes
+const authRoutes = require("./routes/authRoutes");
 
 //database connection
 mongoose
@@ -29,6 +33,9 @@ app.use(
 );
 app.use(cookieParser());
 app.use(cors());
+
+// Routes Middleware
+app.use("/api", authRoutes);
 
 // errorHandler middleware
 app.use(errorHandler);
