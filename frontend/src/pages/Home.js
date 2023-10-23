@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 
 import Navbar from "../component/Navbar";
 import Header from "../component/Header";
+import Footer from "../component/Footer";
+
 import CardElement from "../component/CardElement";
 
 import {
@@ -91,6 +93,7 @@ const Home = () => {
           </Stack>
         </Container>
       </Box>
+      <Footer />
     </>
   );
 };
