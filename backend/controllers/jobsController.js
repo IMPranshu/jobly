@@ -99,6 +99,7 @@ exports.showJobs = async (req, res, next) => {
       jobType: categ,
       location: locationFilter,
     })
+      .sort({ createdAt: -1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize);
     res.status(200).json({
