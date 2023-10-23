@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import WorkIcon from "@mui/icons-material/Work";
 import { Link } from "react-router-dom";
 import { useTheme } from "@emotion/react";
+import { useSelector } from "react-redux";
 
 const pages = ["Home", "Log In"];
 
@@ -21,6 +22,7 @@ function Navbar() {
   const { palette } = useTheme();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { isAuthenticated } = useSelector((state) => state.signIn);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -165,31 +167,33 @@ function Navbar() {
                 </Typography>
               </MenuItem>
 
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link
+              {isAuthenticated ? (
+                <MenuItem>
+                  <Typography
                     style={{
                       textDecoration: "none",
                       color: palette.primary.main,
                     }}
-                    to="/login"
+                    textAlign="center"
                   >
-                    Log In
-                  </Link>
-                </Typography>
-              </MenuItem>
-
-              <MenuItem>
-                <Typography
-                  style={{
-                    textDecoration: "none",
-                    color: palette.primary.main,
-                  }}
-                  textAlign="center"
-                >
-                  Log Out
-                </Typography>
-              </MenuItem>
+                    Log Out
+                  </Typography>
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: palette.primary.main,
+                      }}
+                      to="/login"
+                    >
+                      Log In
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
         </Toolbar>
