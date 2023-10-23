@@ -15,8 +15,10 @@ const jobTypeRoute = require("./routes/jobsTypeRoutes");
 const jobRoute = require("./routes/jobsRoutes");
 
 // database connection
+DATABASE = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@job-portal.daryxlr.mongodb.net/?retryWrites=true&w=majority`;
+
 mongoose
-  .connect(process.env.DATABASE, {
+  .connect(DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
