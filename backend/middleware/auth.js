@@ -7,7 +7,7 @@ exports.isAuthenticated = async (req, res, next) => {
   const { token } = req.cookies;
   // Make sure token exists
   if (!token) {
-    return next(new ErrorResponse("Not authorized to access this route", 401));
+    return next(new ErrorResponse("Please Register & Login!", 401));
   }
 
   try {
@@ -16,14 +16,14 @@ exports.isAuthenticated = async (req, res, next) => {
     req.user = await User.findById(decoded.id);
     next();
   } catch (error) {
-    return next(new ErrorResponse("Not authorized to access this route", 401));
+    return next(new ErrorResponse("Login Expired! Please Login Again", 401));
   }
 };
 
 // middleware for admin
 exports.isAdmin = (req, res, next) => {
   if (req.user.role === 0) {
-    return next(new ErrorResponse("Access denied, you must be an admin", 401));
+    return next(new ErrorResponse("Access denied! You are not an admin.", 401));
   }
   next();
 };
