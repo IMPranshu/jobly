@@ -13,6 +13,9 @@ import {
   USER_APPLY_JOB_FAIL,
   USER_APPLY_JOB_REQUEST,
   USER_APPLY_JOB_SUCCESS,
+  ALL_USER_LOAD_FAIL,
+  ALL_USER_LOAD_REQUEST,
+  ALL_USER_LOAD_SUCCESS,
 } from "../constants/userConstant";
 
 export const userSignInAction = (user) => async (dispatch) => {
@@ -88,5 +91,22 @@ export const userApplyJobAction = (job) => async (dispatch) => {
       payload: error.response.data.error,
     });
     toast.error(error.response.data.error);
+  }
+};
+
+// all user action
+export const allUserAction = () => async (dispatch) => {
+  dispatch({ type: ALL_USER_LOAD_REQUEST });
+  try {
+    const { data } = await axios.get("/api/allusers");
+    dispatch({
+      type: ALL_USER_LOAD_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_USER_LOAD_FAIL,
+      payload: error.response.data.error,
+    });
   }
 };

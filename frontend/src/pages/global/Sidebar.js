@@ -114,13 +114,6 @@ const SidebarAdm = () => {
                     {" "}
                     Jobs{" "}
                   </MenuItem>
-                  <MenuItem
-                    component={<Link to="/admin/category" />}
-                    icon={<CategoryIcon />}
-                  >
-                    {" "}
-                    Category{" "}
-                  </MenuItem>
                 </>
               ) : (
                 <>
