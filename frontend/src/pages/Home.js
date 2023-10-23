@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 
 import { jobLoadAction } from "../redux/actions/jobAction";
+import LoadingBox from "../component/LoadingBox";
 
 const Home = () => {
   const { jobs, setUniqueLocation, pages, loading } = useSelector(
@@ -69,7 +70,23 @@ const Home = () => {
               </Card>
             </Box>
             <Box sx={{ flex: 5, p: 2 }}>
-              {jobs &&
+              {loading ? (
+                <LoadingBox />
+              ) : jobs && jobs.length === 0 ? (
+                <>
+                  <Box
+                    sx={{
+                      minHeight: "350px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h2>No result found!</h2>
+                  </Box>
+                </>
+              ) : (
+                jobs &&
                 jobs.map((job, i) => (
                   <CardElement
                     key={i}
@@ -81,7 +98,8 @@ const Home = () => {
                     }
                     location={job.location}
                   />
-                ))}
+                ))
+              )}
               <Stack spacing={2}>
                 <Pagination
                   page={page}
