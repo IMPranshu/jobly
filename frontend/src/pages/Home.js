@@ -22,6 +22,10 @@ import {
 } from "@mui/material";
 
 import { jobLoadAction } from "../redux/actions/jobAction";
+import SelectComponent from "../component/SelectComponent";
+import { jobTypeLoadAction } from "../redux/actions/jobTypeAction";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+
 import LoadingBox from "../component/LoadingBox";
 
 const Home = () => {
@@ -40,6 +44,10 @@ const Home = () => {
   useEffect(() => {
     dispatch(jobLoadAction(page, keyword, cat, location));
   }, [page, keyword, cat, location]);
+
+  useEffect(() => {
+    dispatch(jobTypeLoadAction());
+  }, []);
 
   const handleChangeCategory = (e) => {
     setCat(e.target.value);
@@ -66,6 +74,47 @@ const Home = () => {
                   >
                     Filter job by category
                   </Typography>
+                  <SelectComponent
+                    handleChangeCategory={handleChangeCategory}
+                    cat={cat}
+                  />
+                </Box>
+              </Card>
+              {/* jobs by location */}
+              <Card sx={{ minWidth: 150, mb: 3, mt: 3, p: 2 }}>
+                <Box sx={{ pb: 2 }}>
+                  {/* <h4>Filter by category</h4> */}
+                  <Typography
+                    component="h4"
+                    sx={{
+                      color: palette.secondary.contrastText,
+                      fontWeight: 600,
+                    }}
+                  >
+                    Filter job by location
+                  </Typography>
+                  <MenuList>
+                    {setUniqueLocation &&
+                      setUniqueLocation.map((location, i) => (
+                        <Link
+                          to={`/search/location/${location}`}
+                          style={{ color: palette.secondary.contrastText }}
+                        >
+                          <MenuItem key={i}>
+                            <ListItemIcon>
+                              <LocationOnIcon
+                                sx={{
+                                  color: palette.secondary.contrastText,
+                                  fontSize: 18,
+                                }}
+                              />
+                            </ListItemIcon>
+
+                            {location}
+                          </MenuItem>
+                        </Link>
+                      ))}
+                  </MenuList>
                 </Box>
               </Card>
             </Box>
