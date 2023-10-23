@@ -11,6 +11,8 @@ var cors = require("cors");
 // import routes
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const jobTypeRoute = require("./routes/jobsTypeRoutes");
+const jobRoute = require("./routes/jobsRoutes");
 
 // database connection
 mongoose
@@ -38,6 +40,8 @@ app.use(cors());
 // Routes Middleware
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", jobTypeRoute);
+app.use("/api", jobRoute);
 
 // errorHandler middleware
 app.use(errorHandler);
