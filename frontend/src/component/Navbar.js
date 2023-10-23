@@ -169,32 +169,28 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: palette.primary.main,
-                    }}
-                    to="/admin/dashboard"
-                  >
-                    Admin Dashboard
-                  </Link>
-                </Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: palette.primary.main,
-                    }}
-                    to="/user/dashboard"
-                  >
-                    User Dashboard
-                  </Link>
-                </Typography>
-              </MenuItem>
+              <Link
+                style={{
+                  textDecoration: "none",
+                  color: palette.primary.main,
+                }}
+                to="/admin/dashboard"
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Admin Dashboard</Typography>
+                </MenuItem>
+              </Link>
+              <Link
+                style={{
+                  textDecoration: "none",
+                  color: palette.primary.main,
+                }}
+                to="/user/dashboard"
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">User Dashboard</Typography>
+                </MenuItem>
+              </Link>
 
               {isAuthenticated ? (
                 <MenuItem onClick={logoutUser}>
@@ -209,19 +205,17 @@ const Navbar = () => {
                   </Typography>
                 </MenuItem>
               ) : (
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        color: palette.primary.main,
-                      }}
-                      to="/login"
-                    >
-                      Log In
-                    </Link>
-                  </Typography>
-                </MenuItem>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                    color: palette.primary.main,
+                  }}
+                  to="/login"
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">Log In</Typography>
+                  </MenuItem>
+                </Link>
               )}
             </Menu>
           </Box>
