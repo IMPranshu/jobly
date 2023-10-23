@@ -13,6 +13,8 @@ import Layout from "./pages/global/Layout";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import UserJobsHistory from "./pages/user/UserJobsHistory";
 import UserInfoDashboard from "./pages/user/UserInfoDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminRoute from "./component/AdminRoute";
 
 import axios from "axios";
 
@@ -22,6 +24,7 @@ axios.defaults.baseURL =
 const UserDashboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
 const UserInfoDashboardHOC = Layout(UserInfoDashboard);
+const AdminDashboardHOC = Layout(AdminDashboard);
 
 const App = () => {
   return (
@@ -36,6 +39,16 @@ const App = () => {
               <Route path="/search/location/:location" element={<Home />} />
               <Route path="/search/:keyword" element={<Home />} />
               <Route path="/login" element={<LogIn />} />
+
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoute>
+                    <AdminDashboardHOC />
+                  </AdminRoute>
+                }
+              />
+
               <Route
                 path="/user/dashboard"
                 element={
