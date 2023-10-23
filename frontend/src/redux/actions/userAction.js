@@ -10,6 +10,9 @@ import {
   USER_SIGNIN_FAIL,
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
+  USER_APPLY_JOB_FAIL,
+  USER_APPLY_JOB_REQUEST,
+  USER_APPLY_JOB_SUCCESS,
 } from "../constants/userConstant";
 
 export const userSignInAction = (user) => async (dispatch) => {
@@ -65,5 +68,25 @@ export const userProfileAction = () => async (dispatch) => {
       type: USER_LOAD_FAIL,
       payload: error.response.data.error,
     });
+  }
+};
+
+//user job apply action
+export const userApplyJobAction = (job) => async (dispatch) => {
+  dispatch({ type: USER_APPLY_JOB_REQUEST });
+  try {
+    const { data } = await axios.post("/api/user/jobhistory", job);
+
+    dispatch({
+      type: USER_APPLY_JOB_SUCCESS,
+      payload: data,
+    });
+    toast.success("Apply Successfully for this Job!");
+  } catch (error) {
+    dispatch({
+      type: USER_APPLY_JOB_FAIL,
+      payload: error.response.data.error,
+    });
+    toast.error(error.response.data.error);
   }
 };

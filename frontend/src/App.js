@@ -15,6 +15,7 @@ import UserJobsHistory from "./pages/user/UserJobsHistory";
 import UserInfoDashboard from "./pages/user/UserInfoDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./component/AdminRoute";
+import SingleJob from "./pages/SingleJob";
 
 import axios from "axios";
 
@@ -73,6 +74,7 @@ const App = () => {
                   </UserRoute>
                 }
               />
+              <Route path="/job/:id" element={<SingleJob />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
