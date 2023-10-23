@@ -10,8 +10,9 @@ var cors = require("cors");
 
 // import routes
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 
-//database connection
+// database connection
 mongoose
   .connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -22,7 +23,7 @@ mongoose
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err));
 
-//Middleware
+// Middleware
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "5mb" }));
 app.use(
@@ -36,6 +37,7 @@ app.use(cors());
 
 // Routes Middleware
 app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 
 // errorHandler middleware
 app.use(errorHandler);
