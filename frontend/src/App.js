@@ -12,7 +12,10 @@ import UserRoute from "./component/UserRoute";
 import Layout from "./pages/global/Layout";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import UserJobsHistory from "./pages/user/UserJobsHistory";
+import axios from "axios";
 
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : "";
 // HOC
 const UserDashboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
